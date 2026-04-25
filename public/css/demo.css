@@ -127,3 +127,11 @@ h4 {
     padding: 0.1%;
 }
 
+.right {
+    padding-left: 7%;
+}
+
+.small {
+    width: 300px;
+    height: auto;
+}
