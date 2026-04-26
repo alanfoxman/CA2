@@ -105,6 +105,17 @@ messageForm.addEventListener("submit", (e) => {
     inputField.value = "";
 });
 
+inputField.addEventListener("input", (e) => {
+
+    socket.emit("typing", {
+        typing_message: "is typing...",
+        nick: userName,
+    });
+
+
+});
+
+
 socket.on("chat message", function (data) {
     addNewMessage({ user: data.nick, message: data.message });
 });
@@ -116,3 +127,9 @@ socket.on("new user", function (data) {
 socket.on("user disconnected", function (data) {
     addNewMessage({ user: "", message: `${data} left the chat` });
 });
+
+socket.on("typing", function (data) {
+    addNewMessage({ user: data.nick, message: data.nick + " " + data.typing_message });
+});
+
+
