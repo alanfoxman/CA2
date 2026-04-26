@@ -112,3 +112,7 @@ socket.on("chat message", function (data) {
 socket.on("new user", function (data) {
     addNewMessage({ user: "", message: `${data.pop()} joined the chat`});
 });
+
+socket.on("user disconnected", function (data) {
+    addNewMessage({ user: "", message: `${data} left the chat` });
+});
