@@ -133,7 +133,7 @@ h4 {
 }
 
 
-@media (max-width: 1200px) {
+@media (max-width: 768px) {
 
     .content {
         margin-left: 0;
