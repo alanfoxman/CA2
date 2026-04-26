@@ -97,25 +97,20 @@ h4 {
 }
 
 
-/* Side navigation links */
-.sidenav a {
-    color: black;
-    padding: 16px;
-    text-decoration: none;
-    display: block;
-}
 
 
 
     /* Change color on hover */
-    .sidenav a:hover {
+
+
+.sidenav a:hover {
         background-color: #ddd;
         color: black;
     }
 
 /* Style the content */
 .content {
-    margin-left: 200px;
+    margin-left: 300px;
     padding-left: 20px;
 }
 
@@ -135,4 +130,19 @@ h4 {
 .small {
     width: 300px;
     height: auto;
+}
+
+
+@media (max-width: 1200px) {
+
+    .content {
+        margin-left: 0;
+
+    }
+
+    .sidenav {
+        width: 100%;
+        position: relative;
+    }
+
 }
