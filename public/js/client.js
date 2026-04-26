@@ -108,3 +108,7 @@ messageForm.addEventListener("submit", (e) => {
 socket.on("chat message", function (data) {
     addNewMessage({ user: data.nick, message: data.message });
 });
+
+socket.on("new user", function (data) {
+    addNewMessage({ user: "", message: `${data.pop()} joined the chat`});
+});
