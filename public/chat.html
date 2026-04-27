@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
+
+    <!-- helps with scaling on different devices and screen sizes, improving responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Socket.io simple chat</title>
 
+    <!-- Bootstrap and custom style sheet is imported, with bootstrap being overriden-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/demo.css" />
 
@@ -13,10 +16,11 @@
 <body>
 
     
-
+    <!--chat heading-->
     <h1>Chat</h1>
     
     
+    <!--navigation bar-->
     <nav id="nav">
             <a href="index.html">Home</a>
             <a href="aboutme.html">About me </a>
@@ -26,7 +30,7 @@
 
     
 
-
+    <!--sidenavigation for current users using application-->
     <div class="sidenav">
         <div class="inbox__people">
             <h4>Active users</h4>
@@ -37,7 +41,10 @@
 
     <br>
     <hr>
+    <!--container for chat messages-->
     <div class="content container container-fluid">
+
+        <!--Displays messages-->
         <div class="messages__history"></div>
         <div class="fallback"></div>
         <div class="inbox__messages">
@@ -45,6 +52,7 @@
 
         </div>
 
+        <!--message form for sending messages-->
         <form class="message_form">
             <input type="text" class="message_form__input" placeholder="Type a message" />
             <button class="message_form__button" type="submit">
@@ -53,6 +61,7 @@
         </form>
     </div>
 
+    <!--links scripts to enable chat application-->
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/client.js"></script>
 </body>

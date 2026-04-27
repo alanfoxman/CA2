@@ -28,7 +28,9 @@ io.on("connection", function (socket) {
         io.emit("new user", [...activeUsers]);
     });
 
+
     socket.on("disconnect", function () {
+        // removes user from the list of users when they leave the page
         activeUsers.delete(socket.userId);
         io.emit("user disconnected", socket.userId);
     });
@@ -36,14 +38,11 @@ io.on("connection", function (socket) {
     socket.on("chat message", function (data) {
        io.emit("chat message", data);
 
-  
-
-        console.log("NEW USER:", data);
-        console.log("CHAT FROM:", socket.userId);
 
     });
 
     socket.on("typing", function (data) {
+        //broadcast emits the event to all other users except the one that is typing
         socket.broadcast.emit("typing", data);
     });
 

@@ -4,10 +4,15 @@ const socket = io();
 
 const inboxPeople = document.querySelector(".inbox__people");
 
-const typingIndicator = document.createElement("div");
+//variable for adding a typing indicator to the chat when a user is typing
+const typingIndicator = document.createElement("p");
+//appends the typing indicator to the page
+
+//styling for the typing indicator
 typingIndicator.style.backgroundColor = "#6B8FAD";
 typingIndicator.style.fontStyle = "italic";
 typingIndicator.style.margin = "5px";
+
 
 let userName = "";
 let id;
@@ -58,10 +63,13 @@ socket.on("new user", function (data) {
 
     });
 
+    //get the last user in the array of users, which is the new user that just connected
     const newUser = data[data.length - 1];
-        
+
+    //adds a notification to the chat that a new user joined
     addNewMessage({user: "", message: `${newUser} joined the chat`});
 
+    //styles the notification 
     var notification = document.querySelector(".incoming__message:last-child p");
     notification.style.backgroundColor = "#5A7A9A";
 
@@ -71,8 +79,9 @@ socket.on("new user", function (data) {
 socket.on("user disconnected", function (userName) {
     document.querySelector(`.${userName}-userlist`).remove();
 
-
+    //adds a notification to the chat that a user left
     addNewMessage({ user: "", message: `${userName} left the chat` });
+
     var notification = document.querySelector(".incoming__message:last-child p");
     notification.style.backgroundColor = "#5A7A9A";
 
@@ -144,6 +153,7 @@ inputField.addEventListener("input", () => {
 socket.on("chat message", function (data) {
 
     addNewMessage({ user: data.nick, message: data.message });
+    //automatically scrolls to the bottom when a new message is added
     window.scrollTo(0, document.body.scrollHeight);
 
 
@@ -153,11 +163,14 @@ socket.on("chat message", function (data) {
 
 socket.on("typing", function (data) {
 
+    //returns the typing message with the username of the person typing in the chat
     typingIndicator.textContent = data.nick + " is typing...";
-
+    
+    //if the typing indicator is not already in the message box, then it is appended to the box
     if (!messageBox.contains(typingIndicator)) {
         messageBox.appendChild(typingIndicator);
     }
 
+    //after 1 second, the typing indicator is removed to prevent it from staying
     setTimeout(() => {typingIndicator.remove(); }, 1000);
 });
