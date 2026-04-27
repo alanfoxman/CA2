@@ -140,6 +140,9 @@ socket.on("user disconnected", function (data) {
 
 socket.on("typing", function (data) {
     addNewMessage({ user: data.nick, message: data.nick + " " + data.typing_message });
+    var notification = document.querySelector(".incoming__message:last-child p");
+    notification.style.backgroundColor = "#6B8FAD";
+
 
 });
 
