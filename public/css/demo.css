@@ -32,6 +32,7 @@ h1, h2, h4 {
     margin-bottom: 0;
     padding: 0.5%;
     background-color: #F0F4F8;
+    width: 100%;
 }
 
 
@@ -45,7 +46,6 @@ h1 {
 
 h2, h4 {
     margin-top: 2.5%;
-    width: 100%;
     padding: 0.2%;
     padding-left: 2%;
     text-align: left;
@@ -64,7 +64,8 @@ h4 {
     padding: 0;
     background-color: lightslategrey;
     text-align: center;
-    color: black
+    color: black;
+    width: 100%;
 }
 
 #nav a {
@@ -88,6 +89,15 @@ h4 {
     border: 1px solid black;
     overflow-x: hidden;
 }
+
+.chat_header {
+    margin-left: 200px;
+}
+
+#nav.chat_header {
+    margin: 0 0 20px 200px;
+}
+
 
 /*make the active user text inherit style from container*/
 
@@ -133,6 +143,7 @@ h4 {
 }
 
 
+
 @media (max-width: 768px) {
 
     .content {
@@ -140,9 +151,18 @@ h4 {
 
     }
 
+    
     .sidenav {
         width: 100%;
         position: relative;
+    }
+
+    .chat_header {
+        margin-left: 0
+    }
+
+    #nav.chat_header {
+        margin: 0 0 20px 0;
     }
 
 }
