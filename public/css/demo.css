@@ -9,6 +9,9 @@ body {
     background-color: #8DA9C4;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 16px;
+    margin: 0;
+    padding: 0;
+    
 }
 
 a {
@@ -32,7 +35,6 @@ h1, h2, h4 {
     margin-bottom: 0;
     padding: 0.5%;
     background-color: #F0F4F8;
-    width: 100%;
 }
 
 
@@ -49,6 +51,7 @@ h2, h4 {
     padding: 0.2%;
     padding-left: 2%;
     text-align: left;
+    width: 100%;
 }
 
 h4 {
@@ -65,7 +68,6 @@ h4 {
     background-color: lightslategrey;
     text-align: center;
     color: black;
-    width: 100%;
 }
 
 #nav a {
@@ -85,18 +87,14 @@ h4 {
     z-index: 1;
     top: 0;
     left: 0;
+    box-sizing: border-box;
     background-color: #294550;
     border: 1px solid black;
-    overflow-x: hidden;
 }
 
-.chat_header {
-    margin-left: 200px;
-}
 
-#nav.chat_header {
-    margin: 0 0 20px 200px;
-}
+
+
 
 
 /*make the active user text inherit style from container*/
@@ -117,6 +115,8 @@ h4 {
         background-color: #ddd;
         color: black;
     }
+
+
 
 /* Style the content */
 .content {
@@ -157,12 +157,7 @@ h4 {
         position: relative;
     }
 
-    .chat_header {
-        margin-left: 0
-    }
 
-    #nav.chat_header {
-        margin: 0 0 20px 0;
-    }
+
 
 }

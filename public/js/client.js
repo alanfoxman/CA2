@@ -118,18 +118,29 @@ inputField.addEventListener("input", (e) => {
 
 socket.on("chat message", function (data) {
     addNewMessage({ user: data.nick, message: data.message });
+    window.scrollTo(0, document.body.scrollHeight);
+
+
 });
 
 socket.on("new user", function (data) {
-    addNewMessage({ user: "", message: `${data.pop()} joined the chat`});
+    addNewMessage({ user: "", message: `${data.pop()} joined the chat` });
+    var notification = document.querySelector(".incoming__message:last-child p");
+    notification.style.backgroundColor = "#5A7A9A";
+
+
 });
 
 socket.on("user disconnected", function (data) {
     addNewMessage({ user: "", message: `${data} left the chat` });
+    var notification = document.querySelector(".incoming__message:last-child p");
+    notification.style.backgroundColor = "#5A7A9A";
+
 });
 
 socket.on("typing", function (data) {
     addNewMessage({ user: data.nick, message: data.nick + " " + data.typing_message });
+
 });
 
 
