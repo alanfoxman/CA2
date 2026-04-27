@@ -34,7 +34,13 @@ io.on("connection", function (socket) {
     });
 
     socket.on("chat message", function (data) {
-        io.emit("chat message", data);
+       io.emit("chat message", data);
+
+  
+
+        console.log("NEW USER:", data);
+        console.log("CHAT FROM:", socket.userId);
+
     });
 
     socket.on("typing", function (data) {

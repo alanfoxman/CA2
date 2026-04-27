@@ -49,12 +49,29 @@ newUserConnected();
 socket.on("new user", function (data) {
     data.map(function (user) {
         return addToUsersBox(user);
+
+
+
     });
+
+    const newUser = data[data.length - 1];
+        
+    addNewMessage({user: "", message: `${newUser} joined the chat`});
+
+    var notification = document.querySelector(".incoming__message:last-child p");
+    notification.style.backgroundColor = "#5A7A9A";
+
 });
 
 //when a user leaves
 socket.on("user disconnected", function (userName) {
     document.querySelector(`.${userName}-userlist`).remove();
+
+
+    addNewMessage({ user: "", message: `${userName} left the chat` });
+    var notification = document.querySelector(".incoming__message:last-child p");
+    notification.style.backgroundColor = "#5A7A9A";
+
 });
 
 
@@ -70,9 +87,8 @@ const addNewMessage = ({ user, message }) => {
   <div class="incoming__message">
     <div class="received__message">
       <p>${message}</p>
-      <div class="message__info">
-        <span class="message__author">${user}</span>
-        <span class="time_date">${formattedTime}</span>
+      <div class="message__info>
+      ${user !== userName ? `<span class="message__author">${user}</span>` : ""}        <span class="time_date">${formattedTime}</span>
       </div>
     </div>
   </div>`;
@@ -90,6 +106,8 @@ const addNewMessage = ({ user, message }) => {
     //is the message sent or received
     messageBox.innerHTML += user === userName ? myMsg : receivedMsg;
 };
+
+
 
 messageForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -111,38 +129,25 @@ inputField.addEventListener("input", (e) => {
         typing_message: "is typing...",
         nick: userName,
     });
-
-
+    
 });
 
 
 socket.on("chat message", function (data) {
+
     addNewMessage({ user: data.nick, message: data.message });
     window.scrollTo(0, document.body.scrollHeight);
 
 
 });
 
-socket.on("new user", function (data) {
-    addNewMessage({ user: "", message: `${data.pop()} joined the chat` });
-    var notification = document.querySelector(".incoming__message:last-child p");
-    notification.style.backgroundColor = "#5A7A9A";
 
 
-});
-
-socket.on("user disconnected", function (data) {
-    addNewMessage({ user: "", message: `${data} left the chat` });
-    var notification = document.querySelector(".incoming__message:last-child p");
-    notification.style.backgroundColor = "#5A7A9A";
-
-});
 
 socket.on("typing", function (data) {
     addNewMessage({ user: data.nick, message: data.nick + " " + data.typing_message });
     var notification = document.querySelector(".incoming__message:last-child p");
     notification.style.backgroundColor = "#6B8FAD";
-
 
 });
 
