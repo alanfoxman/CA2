@@ -4,6 +4,10 @@ const socket = io();
 
 const inboxPeople = document.querySelector(".inbox__people");
 
+const typingIndicator = document.createElement("div");
+typingIndicator.style.backgroundColor = "#6B8FAD";
+typingIndicator.style.fontStyle = "italic";
+typingIndicator.style.margin = "5px";
 
 let userName = "";
 let id;
@@ -87,8 +91,9 @@ const addNewMessage = ({ user, message }) => {
   <div class="incoming__message">
     <div class="received__message">
       <p>${message}</p>
-      <div class="message__info>
-      ${user !== userName ? `<span class="message__author">${user}</span>` : ""}        <span class="time_date">${formattedTime}</span>
+      <div class="message__info">
+        <span class="message__author">${user}</span>
+        <span class="time_date">${formattedTime}</span>
       </div>
     </div>
   </div>`;
@@ -103,9 +108,12 @@ const addNewMessage = ({ user, message }) => {
     </div>
   </div>`;
 
+
     //is the message sent or received
     messageBox.innerHTML += user === userName ? myMsg : receivedMsg;
+
 };
+
 
 
 
@@ -123,7 +131,7 @@ messageForm.addEventListener("submit", (e) => {
     inputField.value = "";
 });
 
-inputField.addEventListener("input", (e) => {
+inputField.addEventListener("input", () => {
 
     socket.emit("typing", {
         typing_message: "is typing...",
@@ -143,12 +151,13 @@ socket.on("chat message", function (data) {
 
 
 
-
 socket.on("typing", function (data) {
-    addNewMessage({ user: data.nick, message: data.nick + " " + data.typing_message });
-    var notification = document.querySelector(".incoming__message:last-child p");
-    notification.style.backgroundColor = "#6B8FAD";
 
+    typingIndicator.textContent = data.nick + " is typing...";
+
+    if (!messageBox.contains(typingIndicator)) {
+        messageBox.appendChild(typingIndicator);
+    }
+
+    setTimeout(() => {typingIndicator.remove(); }, 1000);
 });
-
-
